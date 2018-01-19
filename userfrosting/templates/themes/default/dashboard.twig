@@ -1,0 +1,35 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "Dashboard",
+        "description" : "Your user dashboard."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="page-header">Dashboard</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="container col-xs-9">
+      <div class="panel panel-info">
+      <div class="panel-heading"><i class= "fa fa-user fa-2x pull-left" aria-hidden="true"></i><label style="font-size:160%;">  Datos de la cuenta en uso</label></div>
+      <div class="panel-body" style="font-size:120%"> La cuenta en uso pertenece al grupo <b><i>{% for q in usergroupname %} {{q.name}} {% endfor %}</i></b> y tiene una suscripción valida hasta <i><b>PLACEHOLDER</b></i>. Cualquier consulta sobre la cuenta o sobre el servicio en general deberá ser dirigida a la siguiente dirección de correo electrónico: <i><b>PLACEHOLDER</b></i>.</div> 
+      </div>
+    </div>
+</div>
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+{% endblock %}

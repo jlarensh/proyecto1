@@ -1,0 +1,14 @@
+   {% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Account Groups",
+                    "description" : "A list of the groups to which you belong."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+
+            {% block content %}
+                <h1>The user's ID is {{user.id}}.</h1>
+            {% endblock %}

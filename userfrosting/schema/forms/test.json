@@ -1,0 +1,172 @@
+{
+            "group_id" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "group_id must be an integer"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "actademo_chosendate" : {
+                "validators" : {
+                    "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                    }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "accnumber" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "this shit is hidden bro"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "actademo_acc1nombre" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      },
+                       "required" : {
+                         "message" : "Debe ingresar al menos 1 accionista o socio"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+            "actademo_acc1acciones" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "Este campo debe ser un número entero"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "actademo_acc2nombre" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                       },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+            "actademo_acc2acciones" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "Este campo debe ser un número entero"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "actademo_acc3nombre" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                       },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+            "actademo_acc3acciones" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "Este campo debe ser un número entero"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "actademo_cianombre" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      },
+                       "required" : {
+                         "message" : "Este campo es obligatorio"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+            "actademo_capital" : {
+                "validators" : {
+                      "numeric" : {
+                          "message" : "Este campo debe conter únicamente números"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+             "actademo_valnominal" : {
+                "validators" : {
+                      "numeric" : {
+                          "message" : "Este campo debe conter únicamente números"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },           
+            "ciatype" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            }
+        }

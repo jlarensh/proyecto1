@@ -1,0 +1,434 @@
+   {% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Minutas Demo",
+                    "description" : "Una demostración del formulario para elaborar minutas."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+           
+            
+            
+
+            {% block content %}
+                <div class="row">
+                <div class="col-xs-10">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading contains-buttons">
+                      <div class="btn-group pull-right" title="Abrir o cerrar el panel de consulta a la base de datos">
+                      <a class="btn btn-primary btn-sm glyphicon glyphicon-asterisk" id="dbb"></a>
+                      </div>
+                      <label style="font-size:140%;"><i class= "fa fa-bars"></i> Introduce los datos de la minuta</label>
+                    </div>
+                    <div class="panel-body">
+                      <form class="form-horizontal" role="form" name="minutademo" action="{{site.uri.public}}/forms/minutas" method="post">
+
+
+                        <!-- Tipo de comprador group -->
+                        <div class="form-group" id="tipodecompradordiv">
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Tipo de comprador:">Tipo de comprador:</label>
+                          <div class="col-xs-9">
+                                <div class='input-group'>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="tipodecompradorddb">Elegir un tipo <span class="caret"></span>
+                                    </button>            
+                                      <ul class="dropdown-menu" role="menu">
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block tiposoltero">Soltero(a)</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block tipoconyuges">Cónyuges</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block tipopersonajuridica">Persona Jurídica</button>
+                                      </li>
+                                      </ul>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- Hidden tipo de comprador group -->                        
+                        <div class="form-group hidden" id="hiddentipodecompradordiv">
+                          <div class="col-xs-8">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control hidden" name="minutademo_tipodecomprador" value=""/>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Cónyuge 1 name group -->
+                        <div class="form-group" id="conyuge1namediv">
+                        <label for="input_group" id="conyuge1namelabel" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Conyuge 1:">Cónyuge 1:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_conyuge1name" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 1 dirección group -->
+                        <div class="form-group" id="conyuge1dirdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge1dirlabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Dirección:">Dirección:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge1dir" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 1 celular group -->
+                        <div class="form-group" id="conyuge1celdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge1cellabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Celular:">Celular:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge1cel" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 1 convencional group -->
+                        <div class="form-group" id="conyuge1convdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge1convlabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Convencional:">Convencional:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge1conv" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 1 email group -->
+                        <div class="form-group" id="conyuge1maildiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge1maillabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Email:">Email:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge1mail" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Cónyuge 2 name group -->
+                        <div class="form-group" id="conyuge2namediv">
+                        <label for="input_group" id="conyuge2namelabel" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Conyuge 2:">Cónyuge 2:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_conyuge2name" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 2 dirección group -->
+                        <div class="form-group" id="conyuge2dirdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge2dirlabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Dirección:">Dirección:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge2dir" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 2 celular group -->
+                        <div class="form-group" id="conyuge2celdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge2cellabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Celular:">Celular:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge2cel" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 2 convencional group -->
+                        <div class="form-group" id="conyuge2convdiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge2convlabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Convencional:">Convencional:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge2conv" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- cónyuge 2 email group -->
+                        <div class="form-group" id="conyuge2maildiv">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="conyuge2maillabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Email:">Email:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="minutademo_conyuge2mail" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Alicuota group -->
+                        <div class="form-group" id="alicuotadiv">
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Alícuota a vender:">Alícuota a vender:</label>
+                          <div class="col-xs-9">
+                                <div class='input-group'>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="alicuotaddb">Urbanización, Edificio, Alícuota (Departamento) <span class="caret"></span>
+                                    </button>            
+                                      <ul class="dropdown-menu" role="menu">
+                                      {% for minuta in minutas1 %}
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block alicuotabtn" id="{{minuta.id}}">{{minuta.urb}}, {{minuta.ph}}, {{minuta.alicuota}} ({{minuta.depname}})</button>
+                                      </li>
+                                      {% endfor %}
+                                      </ul>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- Hidden Alicuota group -->
+                        <div class="form-group hidden" id="hiddenalicuotadiv">
+                          <div class="col-xs-8">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control hidden" name="minutademo_alicuota" value=""/>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Forma de pago group -->
+                        <div class="form-group" id="formadepagodiv">
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Forma de pago:">Forma de pago:</label>
+                          <div class="col-xs-9">
+                                <div class='input-group'>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="formadepagoddb">Elegir una forma de pago <span class="caret"></span>
+                                    </button>            
+                                      <ul class="dropdown-menu" role="menu">
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block formadineropropio">Dinero propio</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" style="width:100%" class="btn btn-link btn-block formamixta">Parte dinero propio y parte con un préstamo hipotecario</button>
+                                      </li>
+                                      </ul>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- Hidden forma de pago group -->                        
+                        <div class="form-group hidden" id="hiddenformadepagodiv">
+                          <div class="col-xs-8">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control hidden" name="minutademo_formadepago" value=""/>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Precio de compraventa group -->
+                        <div class="form-group" id="preciodecvdiv" style="display:none">
+                        <label for="input_group" id="preciodecvlabel" class="col-xs-3 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Precio de compraventa:">Precio de compraventa:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_preciodecv" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Monto en dinero propio group -->
+                        <div class="form-group" id="montodpdiv" style="display:none">
+                        <label for="input_group" id="montodplabel" class="col-xs-3 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Monto en dinero propio:">Monto en dinero propio:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_montodp" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Monto del prestamo group -->
+                        <div class="form-group" id="montopresdiv" style="display:none">
+                        <label for="input_group" id="montopreslabel" class="col-xs-3 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Monto del préstamo:">Monto del préstamo:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_montopres" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- IFIN group -->
+                        <div class="form-group" id="ifindiv" style="display:none">
+                        <label for="input_group" id="ifinlabel" class="col-xs-3 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Institución Financiera:">Institución Financiera:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_ifin" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- Precio de Entrega de Obra group -->
+                        <div class="form-group" id="precioebdiv" style="display:none">
+                        <label for="input_group" id="precioeblabel" class="col-xs-3 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Precio de entrega de obra:">Precio de entrega de obra:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                      <input type='text' class="form-control" name="minutademo_precioeb" autocomplete="off"/>
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                      </span>
+                                  </div>
+                          </div>
+                        </div>
+
+                        <!-- submit button group -->
+                        <div class="form-group text-center">
+                          <button type="submit" class="btn btn-success text-center" title="Crear minuta">Crear minuta</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                </div>   
+            {% endblock %}
+
+{% block page_scripts %}
+
+<script type="text/javascript" src="{{site.uri.js}}/moment-with-locales.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/transition.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/collapse.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/bloodhound.js"></script>
+
+<script type="text/javascript">
+            $(document).ready(function() { 
+                // Load the validator rules for this form
+                var validators = {{validators | raw}};
+                ufFormSubmit(
+                  $("form[name='minutademo']"),
+                  validators,
+                  $("#userfrosting-alerts"),
+                  function(data, statusText, jqXHR) {
+                           window.location.reload(true);       
+                  }
+                );  
+            });
+        </script>
+<script type="text/javascript">
+
+            //db panel button
+            $(document).ready(function() { 
+              $("#dbb").click(function() { 
+                $("#dbpaneldiv").slideToggle(800);
+                  });
+              });
+ 
+        </script>
+        <script>            
+            $(document).ready(function() {
+                ufTable('table-minutas');
+            });
+        </script>
+        <script>            
+            $(document).ready(function() { 
+            $(".tiposoltero").click(function() {
+            $('#tipodecompradorddb').html("Soltero(a)");
+            document.forms['minutademo']['minutademo_tipodecomprador'].value = "Soltero(a)";
+                              });
+            $(".tipoconyuges").click(function() {
+            $('#tipodecompradorddb').html("Cónyuges");
+            document.forms['minutademo']['minutademo_tipodecomprador'].value = "Cónyuges";
+                              });
+            $(".tipopersonajuridica").click(function() {
+            $('#tipodecompradorddb').html("Persona Jurídica");
+            document.forms['minutademo']['minutademo_tipodecomprador'].value = "Persona Jurídica";
+                              });
+              });
+        </script>
+        <script>             
+            $(document).ready(function() { 
+            $(".alicuotabtn").click(function() {
+            $('#alicuotaddb').html($(this).html());
+            document.forms['minutademo']['minutademo_alicuota'].value = $(this).attr('id');
+                              });
+              });
+        </script>
+        <script>            
+            $(document).ready(function() { 
+            $(".formadineropropio").click(function() {
+            $('#formadepagoddb').html("Dinero propio");
+            document.forms['minutademo']['minutademo_formadepago'].value = "Dinero propio";
+            $("#preciodecvdiv").css('display','block');
+            $("#montodpdiv").css('display','none');
+            $("#montopresdiv").css('display','none');
+            $("#ifindiv").css('display','none');
+            $("#precioebdiv").css('display','block');
+            document.forms['minutademo']['minutademo_preciodecv'].value = "";
+            document.forms['minutademo']['minutademo_montodp'].value = "";
+            document.forms['minutademo']['minutademo_montopres'].value = "";
+            document.forms['minutademo']['minutademo_ifin'].value = "";
+            document.forms['minutademo']['minutademo_precioeb'].value = "";
+                              });
+            $(".formamixta").click(function() {
+            $('#formadepagoddb').html("Parte dinero propio y parte con un préstamo hipotecario");
+            document.forms['minutademo']['minutademo_formadepago'].value = "Mixta";
+            $("#preciodecvdiv").css('display','block');
+            $("#montodpdiv").css('display','block');
+            $("#montopresdiv").css('display','block');
+            $("#ifindiv").css('display','block');
+            $("#precioebdiv").css('display','block');
+            document.forms['minutademo']['minutademo_preciodecv'].value = "";
+            document.forms['minutademo']['minutademo_montodp'].value = "";
+            document.forms['minutademo']['minutademo_montopres'].value = "";
+            document.forms['minutademo']['minutademo_ifin'].value = "";
+            document.forms['minutademo']['minutademo_precioeb'].value = "";
+                              });
+              });
+        </script>
+
+{% endblock %}
+
+
+                                

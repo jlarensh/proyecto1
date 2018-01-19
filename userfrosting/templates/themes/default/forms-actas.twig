@@ -1,0 +1,657 @@
+   {% extends "layouts/layout-dashboard.twig" %}
+            {% set page_group = "dashboard" %}
+
+            {% block page %}   
+                {% set page = page | merge({
+                    "title"       : "Actas Demo",
+                    "description" : "Una demostración del formulario para elaborar actas."
+                }) %}
+                {{ parent() }}
+            {% endblock %}
+           
+            
+            
+
+            {% block content %}
+                <div class="row">
+                <div class="col-xs-10">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading contains-buttons">
+                      <div class="btn-group pull-right" title="Abrir o cerrar el panel de consulta a la base de datos">
+                      <a class="btn btn-primary btn-sm glyphicon glyphicon-asterisk" id="dbb"></a>
+                      </div>
+                      <label style="font-size:140%;"><i class= "fa fa-bars"></i> Introduce los datos del acta</label>
+                    </div>
+                    <div class="panel-body">
+                      <form class="form-horizontal" role="form" name="actasdemo" action="{{site.uri.public}}/forms/actas" method="post">
+
+                        <!-- Panel de consulta a la base de datos group -->
+                        <div class="form-group" id="dbpaneldiv" style="display:none">
+                        <div class="table-responsive">
+                    <table id="table-actas" class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap" data-sortlist="[[0, 0]]">
+                        <thead>
+                            <tr>
+                                <th class="sorter-metatext" data-column-name="cianame">Nombre <i class="fa fa-sort"></i></th>
+                                <th class="sorter-metatext" data-column-name="makedate">Fecha de registro <i class="fa fa-sort"></i></th>
+                                <th class="sorter-metatext" data-column-name="celebdate">Fecha del acta <i class="fa fa-sort"></i></th>
+                                <!-- <th class="sorter-metatext" data-column-name="user_name" style=>Usuario Creador <i class="fa fa-sort"></i></th>-->
+                                <!-- <th class="sorter-metatext" data-column-name="ciatype" style=>Tipo de compañía <i class="fa fa-sort"></i></th>-->
+                                <!-- <th class="sorter-metatext" data-column-name="accnumber" style=>Número de accionistas/socios <i class="fa fa-sort"></i></th>-->
+                                <!-- <th class="sorter-metatext" data-column-name="accdata" style=>Datos de los accionistas/socios <i class="fa fa-sort"></i></th>-->
+                                <th data-column-name="flag_can_delete">Acciones <i class="fa fa-sort"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for acta in actas %}
+                            <tr>
+                                <td data-text="{{acta.cianame}}" class="nr1">
+                                    <strong>
+                                        {{acta.cianame}}
+                                    </strong>
+                                </td>
+                                <td class="nr2">
+                                    {{acta.makedate}}
+                                </td>
+                                <td class="nr3">
+                                    {{acta.celebdate}}
+                                </td>
+                                <td class="nr4" style="display:none">
+                                    {{acta.user_name}}
+                                </td>
+                                <td class="nr5" style="display:none">
+                                    {{acta.ciatype}}
+                                </td>
+                                <td class="nr6" style="display:none">
+                                    {{acta.accnumber}}
+                                </td>
+                                <td class="nr7" style="display:none">
+                                    {{acta.accdata}}
+                                </td>                                                       
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            Acciones
+                                            <span class="caret"></span>
+                                        </button>            
+                                        <ul class="dropdown-menu" role="menu">
+                                           <button type="button" class="btn btn-link btn-xs dballdata">Copiar todos los datos</button>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'components/common/table-tablesorter-default.twig' with {'pager_id' : 'table-actas-pager'} %}
+                                                            <hr style="height:1px">
+                </div>
+                        </div>
+
+                        <!-- Nombre de la cia group -->
+                        <div class="form-group" id="cianombrediv">
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Nombre de la compañía:">Nombre de la compañía:</label>
+                          <div class="col-xs-9">
+                                <div class='input-group'>
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary text-center disabled" id="ciaSA">S.A.</button>
+                                            <button type="button" class="btn btn-primary text-center" id="ciaLTDA">LTDA</button>
+                                        </span>
+                                <input type='text' class="form-control" name="actademo_cianombre" autocomplete="off"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- Fecha y hora de la junta group -->
+                        <div class="form-group">
+                          <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Fecha y hora de la junta:">Fecha y hora de la junta:</label>
+                          <div class="col-xs-9">
+                                    <div class='input-group date' id='datetimepicker2'>
+                                        <input type='text' class="form-control" name="actademo_chosendate" />
+                                        <span class="input-group-addon"  title="Haz click para elegir una fecha">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                         <span class="input-group-btn">
+                                          <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- Presidente de la junta group -->
+                        <div class="form-group" id="presidentenombrediv">
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Presidente de la junta:">Presidente de la junta:</label>
+                          <div class="col-xs-9">
+                                  <div class='input-group'>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="cargopresidente">Cargo <span class="caret"></span>
+                                    </button>            
+                                      <ul class="dropdown-menu" role="menu">
+                                      <li>
+                                      <button type="button" class="btn btn-link btn-xs cargopres">Presidente</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" class="btn btn-link btn-xs cargopresejec">Presidente Ejecutivo</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" class="btn btn-link btn-xs cargopresadhoc">Presidente Ad-Hoc</button>
+                                      </li>
+                                      <li>
+                                      <button type="button" class="btn btn-link btn-xs cargoliqsup">Liquidador Suplente</button>
+                                      </li>
+                                      </ul>
+                                    </span>
+                                <input type='text' class="form-control" name="actademo_presidentenombre" autocomplete="off"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                </div>
+                          </div>
+                        </div>
+                        <!-- Hidden presidente cargo group -->
+                        <div class="form-group hidden" id="prescargodiv">
+                          <div class="col-xs-8">
+                                    <div class='input-group'>
+                                        <input type='text' class="form-control hidden" name="prescargo" value="Presidente"/>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- Capital y valor nominal por accion group -->
+                        <div class="form-group" id="ciacapitalyvalnomdiv">
+                        <label for="input_group" class="col-xs-3 control-label" title="Capital">Capital:</label>
+                          <div class="col-xs-3">
+                                <div class='input-group'>
+                                <input type='text' class="form-control" name="actademo_capital" autocomplete="off"/>
+                                   <span class="input-group-btn">
+                                     <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                   </span>
+                                </div>
+                                </div>
+                        <label for="input_group" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Valor nominal por acción:">Valor nominal por acción:</label>
+                          <div class="col-xs-3">
+                                <div class='input-group'>
+                                <input type='text' class="form-control" name="actademo_valnominal" autocomplete="off"/>
+                                   <span class="input-group-btn">
+                                     <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                   </span>
+                                </div>
+                          </div>
+                        </div>
+
+                        <!-- Hidden acc number group -->
+                        <div class="form-group hidden" id="accnumberdiv">
+                          <div class="col-xs-8">
+                                    <div class='input-group'>
+                                        <input type='text' class="form-control hidden" name="accnumber" value="1"/>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- Hidden cia type group -->
+                        <div class="form-group hidden" id="ciatypediv">
+                          <div class="col-xs-8">
+                                    <div class='input-group'>
+                                        <input type='text' class="form-control hidden" name="ciatype" value="S.A."/>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 1 group: nombre -->
+                        <div class="form-group" id="acc1nombre">
+                          <label for="input_group" id= "acc1nombrelabel" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Accionista 1:">Accionista 1:</label>
+                          <div class="col-xs-9">
+                                    <div class='input-group'>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="tipocacc1">Tipo <span class="caret"></span>
+                                        </button>            
+                                        <ul class="dropdown-menu" role="menu">
+                                          <li>
+                                           <button type="button" class="btn btn-link btn-xs tipoacc1pn">P. Natural</button>
+                                          </li>
+                                          <li>
+                                           <button type="button" class="btn btn-link btn-xs tipoacc1pnag">P. Natural representada por Apoderado</button>
+                                          </li>
+                                          <li>
+                                           <button type="button" class="btn btn-link btn-xs tipoacc1pj1rep">P. Jurídica con 1 representante</button>
+                                          </li>
+                                          <li>
+                                           <button type="button" class="btn btn-link btn-xs tipoacc1pj2rep">P. Jurídica con 2 representantes</button>
+                                          </li>
+                                          <li>
+                                           <button type="button" class="btn btn-link btn-xs tipoacc1pj3rep">P. Jurídica con 3 representantes</button>
+                                          </li>
+                                        </ul>
+                                        </span>
+                                        <input type='text' class="form-control" name="actademo_acc1nombre" autocomplete="off" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary text-center" id="plusacc1">+</button>
+                                            <button type="button" class="btn btn-primary text-center disabled" id="minusacc1">-</button>
+                                            <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 1 group: acciones -->
+                        <div class="form-group" id="acc1acciones">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group" id="acc1accioneslabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="# de acciones:"># de acciones:</label>
+                          <div class="col-xs-8">  
+                          <div class='input-group'>                         
+                            <input type='text' class="form-control" name="actademo_acc1acciones" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>       
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 2 group: nombre -->
+                        <div class="form-group" id="acc2nombre" style="display:none">
+                          <label for="input_group" id= "acc2nombrelabel" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Accionista 2:">Accionista 2:</label>
+                          <div class="col-xs-9">
+                                    <div class='input-group'>
+                                        <input type='text' class="form-control" name="actademo_acc2nombre" autocomplete="off" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary text-center" id="plusacc2">+</button>
+                                            <button type="button" class="btn btn-primary text-center" id="minusacc2">-</button>
+                                            <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 2 group: acciones -->
+                        <div class="form-group" id="acc2acciones" style="display:none">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group hidden" id="acc2accioneslabel" class="col-xs-2 control-label  small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="# de acciones:"># de acciones:</label>
+                          <div class="col-xs-8">
+                          <div class='input-group'>     
+                            <input type='text' class="form-control" name="actademo_acc2acciones" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 3 group: nombre -->
+                        <div class="form-group" id="acc3nombre" style="display:none">
+                          <label for="input_group" id= "acc3nombrelabel" class="col-xs-3 control-label" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="Accionista 3:">Accionista 3:</label>
+                          <div class="col-xs-9">
+                                    <div class='input-group'>
+                                        <input type='text' class="form-control" name="actademo_acc3nombre" autocomplete="off" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary text-center" id="plusacc3">+</button>
+                                            <button type="button" class="btn btn-primary text-center" id="minusacc3">-</button>
+                                            <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                        </span>
+                                    </div>
+                          </div>
+                        </div>
+
+                        <!-- acc 3 group: acciones -->
+                        <div class="form-group" id="acc3acciones" style="display:none">
+                          <div class="col-xs-2">
+                          </div>
+                          <label for="input_group hidden" id="acc3accioneslabel" class="col-xs-2 control-label small" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="# de acciones:"># de acciones:</label>
+                          <div class="col-xs-8">
+                          <div class='input-group'>            
+                            <input type='text' class="form-control" name="actademo_acc3acciones" autocomplete="off"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-info text-center disabled" id="blank1" tabindex=-1 style="height:34px;width:35px"></button>
+                                </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- submit button group -->
+                        <div class="form-group text-center">
+                          <button type="submit" class="btn btn-success text-center" title="Crear acta">Crear acta</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                </div>   
+            {% endblock %}
+
+{% block page_scripts %}
+
+<script type="text/javascript" src="{{site.uri.js}}/moment-with-locales.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/transition.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/collapse.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="{{site.uri.js}}/bloodhound.js"></script>
+<link href="{{site.uri.js}}/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker2').datetimepicker({
+                    locale: 'es',
+                    format: 'DD/MM/YYYY   HH:mm',
+                    daysOfWeekDisabled: [0, 6],
+
+                });
+            });
+        </script>
+<script type="text/javascript">
+            $(document).ready(function() { 
+                // Load the validator rules for this form
+                var validators = {{validators | raw}};
+                ufFormSubmit(
+                  $("form[name='actasdemo']"),
+                  validators,
+                  $("#userfrosting-alerts"),
+                  function(data, statusText, jqXHR) {
+                           window.location.reload(true);       
+                  }
+                );  
+                document.forms['actasdemo']['ciatype'].value = "S.A.";
+                document.forms['actasdemo']['accnumber'].value = "1";
+
+            });
+        </script>
+<script type="text/javascript">
+            //plussacc1 button
+            $(document).ready(function() { 
+              $("#plusacc1").click(function() { 
+                $("#acc2nombre").slideToggle(400);
+                $("#acc2acciones").slideToggle(400);
+                $("#plusacc1").addClass("disabled");
+                $("#plusacc2").removeClass("disabled");
+                $("#minusacc2").removeClass("disabled");
+                document.forms['actasdemo']['accnumber'].value = "2";
+                document.forms['actasdemo']['actademo_acc3nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc3acciones'].value = "";
+                  });
+              });
+            //minusacc2 button
+            $(document).ready(function() { 
+              $("#minusacc2").click(function() { 
+                $("#acc2nombre").slideToggle(400);
+                $("#acc2acciones").slideToggle(400);
+                $("#plusacc1").removeClass("disabled");
+                $("#plusacc2").addClass("disabled");
+                $("#minusacc2").addClass("disabled");
+                document.forms['actasdemo']['accnumber'].value = "1";
+                document.forms['actasdemo']['actademo_acc2nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc2acciones'].value = "";
+                document.forms['actasdemo']['actademo_acc3nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc3acciones'].value = "";
+                  });
+              });
+            //plusacc2 button
+            $(document).ready(function() { 
+              $("#plusacc2").click(function() { 
+                $("#acc3nombre").slideToggle(400);
+                $("#acc3acciones").slideToggle(400);
+                $("#plusacc2").addClass("disabled");
+                $("#minusacc2").addClass("disabled");
+                $("#plusacc3").removeClass("disabled");
+                $("#minusacc3").removeClass("disabled");
+                document.forms['actasdemo']['accnumber'].value = "3";
+                  });
+              });
+
+            //minusacc3 button
+            $(document).ready(function() { 
+              $("#minusacc3").click(function() { 
+                $("#acc3nombre").slideToggle(400);
+                $("#acc3acciones").slideToggle(400);
+                $("#plusacc2").removeClass("disabled");
+                $("#minusacc2").removeClass("disabled");
+                $("#minusacc3").addClass("disabled");
+                document.forms['actasdemo']['accnumber'].value = "2";
+                document.forms['actasdemo']['actademo_acc3nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc3acciones'].value = "";
+                  });
+              });
+            //CIASA button
+            $(document).ready(function() { 
+              $("#ciaSA").click(function() { 
+                $("#ciaSA").toggleClass("disabled");
+                $("#ciaLTDA").toggleClass("disabled");
+                document.forms['actasdemo']['ciatype'].value = "S.A.";
+                $('#acc1accioneslabel').text("# de acciones:");
+                $('#acc2accioneslabel').text("# de acciones:");
+                $('#acc3accioneslabel').text("# de acciones:");
+                $('#acc1accioneslabel').prop('title',"# de acciones:");
+                $('#acc2accioneslabel').prop('title',"# de acciones:");
+                $('#acc3accioneslabel').prop('title',"# de acciones:");
+                $('#acc1nombrelabel').text("Accionista 1:");
+                $('#acc2nombrelabel').text("Accionista 2:");
+                $('#acc3nombrelabel').text("Accionista 3:");
+                $('#acc1nombrelabel').prop('title',"Accionista 1:");
+                $('#acc2nombrelabel').prop('title',"Accionista 2:");
+                $('#acc3nombrelabel').prop('title',"Accionista 3:");
+                  });
+              });
+            //CIALTDA button
+            $(document).ready(function() { 
+              $("#ciaLTDA").click(function() { 
+                $("#ciaSA").toggleClass("disabled");
+                $("#ciaLTDA").toggleClass("disabled");
+                document.forms['actasdemo']['ciatype'].value = "LTDA";
+                $('#acc1accioneslabel').text("# de participaciones:");
+                $('#acc2accioneslabel').text("# de participaciones:");
+                $('#acc3accioneslabel').text("# de participaciones:");
+                $('#acc1accioneslabel').prop('title',"# de participaciones:");
+                $('#acc2accioneslabel').prop('title',"# de participaciones:");
+                $('#acc3accioneslabel').prop('title',"# de participaciones:");
+                $('#acc1nombrelabel').text("Socio 1:");
+                $('#acc2nombrelabel').text("Socio 2:");
+                $('#acc3nombrelabel').text("Socio 3:");
+                $('#acc1nombrelabel').prop('title',"Socio 1:");
+                $('#acc2nombrelabel').prop('title',"Socio 2:");
+                $('#acc3nombrelabel').prop('title',"Socio 3:");
+                  });
+              });
+            //db panel button
+            $(document).ready(function() { 
+              $("#dbb").click(function() { 
+                $("#dbpaneldiv").slideToggle(800);
+                  });
+              });
+            //db copy all button
+            $(document).ready(function() { 
+            $(".dballdata").click(function() {
+              var $row = $(this).closest("tr");    // Find the row
+              var $cianametext = $row.find(".nr1").text(); // Find the text
+              var $makedatetext = $row.find(".nr2").text(); // Find the text
+              var $celebdatetext = $row.find(".nr3").text(); // Find the text
+              var $user_nametext = $row.find(".nr4").text(); // Find the text
+              var $ciatypetext = $row.find(".nr5").text(); // Find the text
+              var $accnumbertext = $row.find(".nr6").text(); // Find the text
+              var $accdatatext = $row.find(".nr7").text(); // Find the text
+              
+              document.forms['actasdemo']['actademo_cianombre'].value = $cianametext.trim();
+              document.forms['actasdemo']['actademo_chosendate'].value = $celebdatetext.trim();
+              document.forms['actasdemo']['ciatype'].value = $ciatypetext.trim();
+              if(document.forms['actasdemo']['ciatype'].value == "S.A."){
+                ;
+                $("#ciaSA").addClass("disabled");
+                $("#ciaLTDA").removeClass("disabled");
+                $('#acc1accioneslabel').text("# de acciones:");
+                $('#acc2accioneslabel').text("# de acciones:");
+                $('#acc3accioneslabel').text("# de acciones:");
+                $('#acc1nombrelabel').text("Accionista 1:");
+                $('#acc2nombrelabel').text("Accionista 2:");
+                $('#acc3nombrelabel').text("Accionista 3:");
+              } else if (document.forms['actasdemo']['ciatype'].value == "LTDA") {
+                $("#ciaSA").removeClass("disabled");
+                $("#ciaLTDA").addClass("disabled");
+                $('#acc1accioneslabel').text("# de participaciones:");
+                $('#acc2accioneslabel').text("# de participaciones:");
+                $('#acc3accioneslabel').text("# de participaciones:");
+                $('#acc1nombrelabel').text("Socio 1:");
+                $('#acc2nombrelabel').text("Socio 2:");
+                $('#acc3nombrelabel').text("Socio 3:");
+              }
+              document.forms['actasdemo']['accnumber'].value = $accnumbertext.trim();
+              if(document.forms['actasdemo']['accnumber'].value == "1"){
+                ;
+                $("#acc3nombre").css('display','none');
+                $("#acc3acciones").css('display','none');
+                $("#plusacc3").addClass("disabled");
+                $("#minusacc3").addClass("disabled");
+                $("#acc2nombre").css('display','none');
+                $("#acc2acciones").css('display','none');
+                $("#plusacc2").addClass("disabled");
+                $("#minusacc2").addClass("disabled");
+                $("#plusacc1").removeClass("disabled");
+              } else if (document.forms['actasdemo']['accnumber'].value == "2") {
+                $("#acc3nombre").css('display','none');
+                $("#acc3acciones").css('display','none');
+                $("#plusacc3").addClass("disabled");
+                $("#minusacc3").addClass("disabled");
+                $("#acc2nombre").css('display','block');
+                $("#acc2acciones").css('display','block');
+                $("#plusacc2").removeClass("disabled");
+                $("#minusacc2").removeClass("disabled");
+                $("#plusacc1").addClass("disabled");
+              } else if (document.forms['actasdemo']['accnumber'].value == "3") {
+                $("#acc3nombre").css('display','block');
+                $("#acc3acciones").css('display','block');
+                $("#plusacc3").removeClass("disabled");
+                $("#minusacc3").removeClass("disabled");
+                $("#acc2nombre").css('display','block');
+                $("#acc2acciones").css('display','block');
+                $("#plusacc2").addClass("disabled");
+                $("#minusacc2").addClass("disabled");
+                $("#plusacc1").addClass("disabled");
+              }
+              if(document.forms['actasdemo']['accnumber'].value == "1"){
+                ;
+                $accdatatext = $accdatatext.trim();
+                var $accdatatextinicialarray = $accdatatext.split(";", 1);
+                var $acc1datatext = $accdatatextinicialarray[0].split(",");
+                var $acc1nombretext = $acc1datatext[0];
+                var $acc1accionestext = $acc1datatext[1];
+                document.forms['actasdemo']['actademo_acc1nombre'].value = $acc1nombretext;
+                document.forms['actasdemo']['actademo_acc1acciones'].value = $acc1accionestext;
+                document.forms['actasdemo']['actademo_acc2nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc2acciones'].value = "";
+                document.forms['actasdemo']['actademo_acc3nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc3acciones'].value = "";
+
+              } else if (document.forms['actasdemo']['accnumber'].value == "2") {
+                $accdatatext = $accdatatext.trim();
+                var $accdatatextinicialarray = $accdatatext.split(";", 2);
+                var $acc1datatext = $accdatatextinicialarray[0].split(",");
+                var $acc2datatext = $accdatatextinicialarray[1].split(",");
+                var $acc1nombretext = $acc1datatext[0];
+                var $acc1accionestext = $acc1datatext[1];
+                var $acc2nombretext = $acc2datatext[0];
+                var $acc2accionestext = $acc2datatext[1];
+                document.forms['actasdemo']['actademo_acc1nombre'].value = $acc1nombretext;
+                document.forms['actasdemo']['actademo_acc1acciones'].value = $acc1accionestext;
+                document.forms['actasdemo']['actademo_acc2nombre'].value = $acc2nombretext;
+                document.forms['actasdemo']['actademo_acc2acciones'].value = $acc2accionestext;
+                document.forms['actasdemo']['actademo_acc3nombre'].value = "";
+                document.forms['actasdemo']['actademo_acc3acciones'].value = "";
+
+              } else if (document.forms['actasdemo']['accnumber'].value == "3") {
+                $accdatatext = $accdatatext.trim();
+                var $accdatatextinicialarray = $accdatatext.split(";", 3);
+                var $acc1datatext = $accdatatextinicialarray[0].split(",");
+                var $acc2datatext = $accdatatextinicialarray[1].split(",");
+                var $acc3datatext = $accdatatextinicialarray[2].split(",");
+                var $acc1nombretext = $acc1datatext[0];
+                var $acc1accionestext = $acc1datatext[1];
+                var $acc2nombretext = $acc2datatext[0];
+                var $acc2accionestext = $acc2datatext[1];
+                var $acc3nombretext = $acc3datatext[0];
+                var $acc3accionestext = $acc3datatext[1];
+                document.forms['actasdemo']['actademo_acc1nombre'].value = $acc1nombretext;
+                document.forms['actasdemo']['actademo_acc1acciones'].value = $acc1accionestext;
+                document.forms['actasdemo']['actademo_acc2nombre'].value = $acc2nombretext;
+                document.forms['actasdemo']['actademo_acc2acciones'].value = $acc2accionestext;
+                document.forms['actasdemo']['actademo_acc3nombre'].value = $acc3nombretext;
+                document.forms['actasdemo']['actademo_acc3acciones'].value = $acc3accionestext;
+              }
+                  });
+              });
+        </script>
+        <script>            
+            $(document).ready(function() {
+                ufTable('table-actas');
+            });
+        </script>
+        <script>            
+            $(document).ready(function() { 
+            $(".cargopres").click(function() {
+            $('#cargopresidente').html("Presidente" + ' <span class="caret"></span>');
+            document.forms['actasdemo']['prescargo'].value = "Presidente";
+                              });
+            $(".cargopresejec").click(function() {
+            $('#cargopresidente').html("Presidente Ejecutivo" + ' <span class="caret"></span>');
+            document.forms['actasdemo']['prescargo'].value = "Presidente Ejecutivo";
+                              });
+            $(".cargopresadhoc").click(function() {
+            $('#cargopresidente').html("Presidente Ad-Hoc" + ' <span class="caret"></span>');
+            document.forms['actasdemo']['prescargo'].value = "Presidente Ad-Hoc";
+                              });
+            $(".cargoliqsup").click(function() {
+            $('#cargopresidente').html("Liquidador Suplente" + ' <span class="caret"></span>');
+            document.forms['actasdemo']['prescargo'].value = "Liquidador Suplente";  
+                  });
+              });
+        </script>
+        <script type="text/javascript"> 
+        var cianamesac = {{ cianameacarray|json_encode|raw }};
+        var cianamesac = new Bloodhound({
+        local: cianamesac,
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+        });
+
+        cianamesac.initialize();
+
+        $('#cianombrediv .form-control').typeahead('destroy');
+        $('#cianombrediv .form-control').typeahead({
+          items: 10,
+          source: cianamesac.ttAdapter(),
+
+        });
+        </script>
+
+        <script type="text/javascript"> 
+        var accdataac = {{ accdataacarray|json_encode|raw }};
+        var accdataac = new Bloodhound({
+        local: accdataac,
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+        });
+
+        accdataac.initialize();
+
+        $('#acc1nombre .form-control').typeahead('destroy');
+        $('#acc1nombre .form-control').typeahead({
+          items: 10,
+          source: accdataac.ttAdapter(),
+
+        });
+        $('#acc2nombre .form-control').typeahead('destroy');
+        $('#acc2nombre .form-control').typeahead({
+          items: 10,
+          source: accdataac.ttAdapter(),
+
+        });
+        $('#acc3nombre .form-control').typeahead('destroy');
+        $('#acc3nombre .form-control').typeahead({
+          items: 10,
+          source: accdataac.ttAdapter(),
+
+        });
+        </script>
+
+{% endblock %}
+
+
+                                

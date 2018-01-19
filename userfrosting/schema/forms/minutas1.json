@@ -1,0 +1,307 @@
+{
+            "minutademo_tipodecomprador" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 0,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      },
+                       "required" : {
+                         "message" : "Debe elegir un tipo de comprador"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+            },
+
+            "minutademo_conyuge1name" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge1dir" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge1cel" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge1conv" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge1mail" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+
+            "minutademo_conyuge2name" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "Este campo debe tener entre 1 y 150 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge2dir" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge2cel" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge2conv" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_conyuge2mail" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_alicuota" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 0,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "required" : {
+                         "message" : "Debe elegir una alícuota a vender"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_formadepago" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 0,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "required" : {
+                         "message" : "Debe elegir una forma de pago"
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_preciodecv" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_montodp" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_montopres" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_ifin" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        },
+            "minutademo_precioeb" : {
+                "validators" : {
+                      "length" : {
+                        "min" : 1,
+                        "max" : 250,
+                        "message" : "Este campo debe tener entre 1 y 250 caracteres"
+                      },
+                       "regex" : {
+                         "regex" : "^[^<>]+$",
+                         "message" : "Este campo no puede contener los siguientes caracteres: '<', '>'"
+                       }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                },
+                "transformations" : [ "escape", "trim" ]
+        }
+        }
